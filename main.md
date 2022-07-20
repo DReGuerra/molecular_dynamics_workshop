@@ -80,7 +80,8 @@ More details on Moltemplate can be found [here](https://www.moltemplate.org/).
     ```
 5. Test Moltemplate
     ```
-    cd ~/moltemplate/examples/all_atom/force_field_OPLSAA/waterSPC_using_OPLSAA/moltemplate_files/ && moltemplate.sh system.lt
+    cd ~/moltemplate/examples/all_atom/force_field_OPLSAA/waterSPC_using_OPLSAA/moltemplate_files/ \
+    && moltemplate.sh system.lt
     ```
 If the script ran without problems, at this point Moltemplate is fully installed.
 
