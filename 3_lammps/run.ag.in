@@ -30,7 +30,7 @@ elif "${restart_sim} == restart" &
     "read_restart ${restartFile}" &
 else &
     "read_data system.data" &
-    "replicate   $#R1 $#R2 $#R3"
+    "replicate   1 1 1"
 
 # import molecule information depending on system simulated and water model used
 if "(${gas} == water) && (${wat} == tip4pice)" then "include tip4p-ice.data"
@@ -92,7 +92,7 @@ if "${replicate} == true" then &
     "velocity        all create ${T} ${seed} loop geom mom yes rot yes dist gaussian"
 
 # produce final coordinates file (with cmd dump) for visualization
-variable        dumpFreq equal $d*20
+variable        dumpFreq equal $d*5
 # dump            trj all atom ${dumpFreq} traj/traj.${ensemble}.lammps
 dump            trjdcd all dcd ${dumpFreq} traj/traj.${ensemble}.dcd
 
@@ -101,6 +101,11 @@ if "${gas} == water" then &
     "fix fixshake water shake 0.0001 100 0 a 1 b 1 # eliminate vel components down bonds" &
 else &
     "fix fixshake water shake 0.0001 100 0 a 2 b 2 # eliminate vel components down bonds"
+
+variable        endstep equal step
+variable        rstrtstep equal ${endstep}
+reset_timestep  0
+variable        ttlstep equal ${rstrtstep}+step
 
 # select ensemble
 if "${ensemble} == nve" then &
@@ -122,7 +127,7 @@ elif "(${gas} == epm2) || (${gas} == trappe) || (${gas} == zhang)" &
 else &
     "variable        rho equal ${H2O_mass}/(vol*${A3_m3}*${m3_cm3})"
 fix             rhoAve all ave/time $s $p $d v_rho &
-                file ./fix/${ensemble}/density_fix.txt
+                file ./fix/density.txt
 
 compute         T all temp
 fix             tempAve all ave/time $s $p $d c_T
@@ -147,6 +152,9 @@ restart         ${restart_freq} ./restart/restart_${ensemble}_*step.data
 timestep        ${dt}   # 2.0 fs
 thermo_style    custom step v_fracDone v_ttlstep v_ttlFracDone temp f_tempAve press f_pressAve &
                 vol density v_rho f_rhoAve pe v_PEmol f_avePEmol ke etotal 
+# thermo_style    custom step v_fracDone v_ttlstep v_ttlFracDone temp press &
+#                 vol density pe ke etotal 
+
 
 thermo_modify   flush yes # no buffer; output to file is online
 thermo          $d # 2000 fs; must be the same as fix calculation intervals
