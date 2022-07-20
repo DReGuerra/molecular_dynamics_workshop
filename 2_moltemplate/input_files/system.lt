@@ -13,7 +13,7 @@ waters = new TIP4Pice [850]
 
 # periodic boundary conditions
 write_once("Data Boundary") {
-    -15. 15. xlo xhi
-    -15. 15. ylo yhi
-    -15. 15. zlo zhi
+    -16. 16. xlo xhi
+    -16. 16. ylo yhi
+    -16. 16. zlo zhi
 }

@@ -7,9 +7,10 @@ andre.guerra@mail.mcgill.ca
 1. Overview
 2. Preparation
 3. Workflow
+4. Analyses
 
 ## 1. Overview
-This markdown file will include the main contents of this workshop. Here, we will discuss any important information and describe some of the main aspects of the molecular dynamics (MD) workflow demonstrated in this repository.
+This markdown file will include the main contents of this workshop. Here, we will discuss any important information and describe some of the main aspects of the molecular dynamics (MD) workflow demonstrated in this repository. The main sections of `main.md` are listed above in the Contents section.
 
 ## 2. Preparation 
 First, we will install the necessary software for executing our MD workflow. The following list is intended as a guide to get started. It may not be comprehensive for all purposes. Please refer to each software's webpage for details/requirements of installation. We will use [PACKMOL](http://leandro.iqm.unicamp.br/m3g/packmol/examples.shtml), [Moltemplate](https://www.moltemplate.org/), and [LAMMPS](https://www.lammps.org/).
@@ -284,3 +285,5 @@ fi
 # back up to test dir
 cd ../
 ```
+
+## 4. Analyses

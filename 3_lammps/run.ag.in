@@ -152,9 +152,6 @@ restart         ${restart_freq} ./restart/restart_${ensemble}_*step.data
 timestep        ${dt}   # 2.0 fs
 thermo_style    custom step v_fracDone v_ttlstep v_ttlFracDone temp f_tempAve press f_pressAve &
                 vol density v_rho f_rhoAve pe v_PEmol f_avePEmol ke etotal 
-# thermo_style    custom step v_fracDone v_ttlstep v_ttlFracDone temp press &
-#                 vol density pe ke etotal 
-
 
 thermo_modify   flush yes # no buffer; output to file is online
 thermo          $d # 2000 fs; must be the same as fix calculation intervals
