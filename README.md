@@ -16,4 +16,4 @@ Below you will see a list of the contents of the repository. The markdown file `
 3. `3_lammps` $\rightarrow$ files associated with LAMMPS
 4. `main.md` $\rightarrow$ this file contains the main content of this workshop
 5. `run.sh` $\rightarrow$ bash script that runs the MD workflow
-6. `run_cvmfs.sh` $\rightarrow$ modified bash script that runs the MD workflow on a cluster with [slurm scheduler](https://slurm.schedmd.com/documentation.html) and the [CVMFS](https://cernvm.cern.ch/fs/) stack
+6. `run_cvmfs.sh` $\rightarrow$ modified bash script that runs the MD workflow on a cluster with [slurm scheduler](https://slurm.schedmd.com/documentation.html) and the [CVMFS](https://cernvm.cern.ch/fs/) stack (for reference and for my own testing)
