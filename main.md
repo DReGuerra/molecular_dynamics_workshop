@@ -287,3 +287,20 @@ cd ../
 ```
 
 ## 4. Analyses
+The output from the LAMMPS molecular dynamics simulation will be saved in the file `log.npt.lammps` (this is how we named it according to the `-log` flag input to `run.sh`) in the directory `3_lammps/`. There are various ways to quantify the performance of your MD simulation, and the one we performed here runs for 40,000 fs (0.04 ns) which is very short. Here we will talk about some basic indicators that should be build upon for a definitive analysis of the simulation output. In the following sections, we will be discussing sections of the log file output by simulation.
+
+### A. Initialization section
+The initialization of our system was completed without errors. We can see in the log file that the correct `pair_style` was used, and the right data files were read in. The simulation box (simbox) was created and populated using the coordinates coming back from our PACKMOL output. I also like to check that the number of atoms, bonds, angles, and molecules are all as expected.
+
+### B. Minimization section
+Our minimization has ran and completed without errors. This energy minimum was achieved within the tolerance limits provided. Once the minimization is complete, we can assign the temperature to the system. The temperature assignment in LAMMPS MD is acomplished by setting velocities to each atom. This is done via the `velocity` command using the `seed` value we fed as input and a Gaussian distribution. 
+
+### C. Thermo table
+1. Temperature and pressure
+    This simulation is ran with the isothermal-isobaric (NPT) ensemble, so both a thermostat and barostat are applied to the system. We would like to see the results reflect the setpoints. It is clear that we quickly begin to trend towards the temperature setpoint. However, the pressure trend is not so clear, especially if looking at the raw pressure value. The barostat controls pressure by adjusting the volume of the simbox. This introduces considerable mechanical disturbances to the system. The result is a relatively unstable raw pressure value, which should be transformed to a moving average so that we can eliminate some of the signal noise and see the long term trend. Note that even in the moving average column, the value still fluctuates. This is normal due to the barostat. Ideally, we would continue this simulation longer, and then restart it in a canonical (NVT) ensemble to remove the barostat and test that the pressure remains stable without mechanical control.
+2. Density
+    The density is a good indicator if we know what the expected value of the system should be. In our case, we have a simulation of pure water at low temperature. We still expect the density to be around 0.99 or 0.98 g/cm3. This is the value that we are trending to in this simulation.
+3. Potential energy
+    We want to make sure that the potential energy of the system approaches (and eventually stabilizes to) the value provided by the original parametrization of the water force field potential. In the case of our simulation, we have used the TIP4P/Ice potential, which has a literature value of [-14.60 kcal/mol](https://aip.scitation.org/doi/full/10.1063/1.1931662). We can see that our simulation is beginning to trend towards that value (-13.35 kcal/mol). This indicates that we are not yet well equilibrated, and we should continue the simulation for a longer simulation time. 
+4. Performance table
+    On line 339, LAMMPS outputs the performance associated with the thermo table above it. This line in particular has good information on how the simulation performed on the hardware you ran it on. The speed of execution can be inferred from: `6.306 ns/day, 3.806 hours/ns, 36.491 timesteps/s`. This can be used to adjust how you assign hardware to your system. This is out of our scope here, but it's interesting to keep in mind. 
