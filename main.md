@@ -81,9 +81,9 @@ More details on Moltemplate can be found [here](https://www.moltemplate.org/).
     ```
     cd ~/moltemplate && pip install . --user
     ```
-4. Export `.local/bin` to PATH
+4. Export `.local/bin` to PATH and make it persistent across logins
     ```
-    export PATH=/home/user/.local/bin:$PATH && source .bashrc
+    echo 'export PATH=~/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
     ```
 5. Test Moltemplate
     ```
@@ -117,9 +117,9 @@ More details on PACKMOL can be found [here](http://leandro.iqm.unicamp.br/m3g/pa
     ```
     tar -xvf examples.tar.gz
     ```
-5. Export packmol to PATH
+5. Export packmol to PATH and make it persistent across logins
     ```
-    export PATH=~/packmol:$PATH 
+    echo 'export PATH=~/packmol:$PATH' >> ~/.bashrc && source ~/.bashrc 
     ```
 6. Test PACKMOL
     ```
