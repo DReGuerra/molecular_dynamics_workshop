@@ -81,9 +81,9 @@ More details on Moltemplate can be found [here](https://www.moltemplate.org/).
     ```
     cd ~/moltemplate && pip install . --user
     ```
-4. Export `.local/bin` to PATH
+4. Export `.local/bin` to PATH and make it persistent across logins
     ```
-    export PATH=/home/user/.local/bin:$PATH && source .bashrc
+    echo 'export PATH=~/.local/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
     ```
 5. Test Moltemplate
     ```
